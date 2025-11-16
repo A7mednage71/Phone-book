@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Book Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Contact List Panel -->
+        <div class="panel" id="listPanel">
+            <h2>Contact List</h2>
+            <input type="text" class="search-bar" id="searchInput" placeholder="🔍 Filter items...">
+            <button class="add-btn" onclick="showAddContact()">➕ Add</button>
+            <div class="contact-list" id="contactList">
+                <div class="no-contacts">No contacts yet. Add your first contact!</div>
+            </div>
+        </div>
+
+        <!-- Contact Detail Panel -->
+        <div class="panel detail-panel hidden" id="detailPanel">
+            <button class="back-btn" onclick="showContactList()">⬅ Back</button>
+            <h2 id="detailTitle">Contact Details</h2>
+            <div class="detail-avatar" id="detailAvatar">M</div>
+            <div class="detail-name" id="detailName">Mona Abdo</div>
+            <div class="detail-actions">
+                <button class="detail-action-btn call-btn" onclick="callContact()" title="Call">📞</button>
+                <button class="detail-action-btn edit-btn" onclick="editContactFromDetail()" title="Edit">✏️</button>
+                <button class="detail-action-btn delete-btn" onclick="confirmDelete()" title="Delete">🗑️</button>
+            </div>
+            <div class="form-group">
+                <div class="form-label">Phone</div>
+                <div id="detailPhone" style="padding: 12px; background: #f5f5f5; border-radius: 8px;">(202) 555-5555</div>
+            </div>
+            <div class="form-group">
+                <div class="form-label">Email</div>
+                <div id="detailEmail" style="padding: 12px; background: #f5f5f5; border-radius: 8px;">-</div>
+            </div>
+            <div class="form-group">
+                <div class="form-label">Gender</div>
+                <div id="detailGender" style="padding: 12px; background: #f5f5f5; border-radius: 8px;">Female</div>
+            </div>
+            <button class="contact-list-btn" onclick="showContactList()">Contact List</button>
+        </div>
+
+        <!-- Add/Edit Contact Panel -->
+        <div class="panel detail-panel hidden" id="formPanel">
+            <button class="back-btn" onclick="cancelForm()">⬅ Back</button>
+            <h2 id="formTitle">New Contact</h2>
+            
+            <form id="contactForm" onsubmit="saveContact(event)">
+                <div class="form-group">
+                    <label class="form-label">Name *</label>
+                    <input type="text" class="form-input" id="nameInput" placeholder="Enter name" required>
+                    <div class="error-message" id="nameError">Name is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone *</label>
+                    <input type="tel" class="form-input" id="phoneInput" placeholder="(202) 555-5555" required>
+                    <div class="error-message" id="phoneError">Valid phone number is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="emailInput" placeholder="example@email.com">
+                    <div class="error-message" id="emailError">Valid email is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Gender</label>
+                    <div class="gender-group">
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="female" checked>
+                            <span>Female</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="male">
+                            <span>Male</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">✓ Save</button>
+                    <button type="button" class="cancel-btn" onclick="cancelForm()">✗ Cancel</button>
+                </div>
+            </form>
+
+            <button class="contact-list-btn" onclick="showContactList()">Contact List</button>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <h3>Delete Contact?</h3>
+            <p>Are you sure you want to delete this contact?</p>
+            <div class="modal-actions">
+                <button class="modal-cancel-btn" onclick="closeDeleteModal()">Cancel</button>
+                <button class="confirm-btn" onclick="deleteContact()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
